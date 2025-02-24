@@ -11,6 +11,7 @@ using SignNow.Net.Model;
 using SignNow.Net.Model.Requests;
 using SignNow.Net.Model.Requests.DocumentGroup;
 using SignNow.Net.Model.Responses;
+using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Service
 {
@@ -184,5 +185,25 @@ namespace SignNow.Net.Service
                 .RequestAsync(requestOptions, new HttpContentToDownloadDocumentResponseAdapter(), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        /// <exception cref="System.ArgumentException">If document group identity is not valid.</exception>
+        public async Task<AddMetadataResponse> AddMetadataAsync(string documentGroupId, DocumentGroupMetadata data, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(data, nameof(data));
+
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new PutHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"/v2/document-groups/{documentGroupId.ValidateId()}/metadata"),
+                Content = data,
+                Token = Token
+            };
+
+            return await SignNowClient
+                .RequestAsync<AddMetadataResponse>(requestOptions, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
     }
 }

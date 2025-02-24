@@ -15,7 +15,7 @@ namespace SignNow.Net.Internal.Infrastructure
     /// <summary>
     /// Detect OS name, platform and architecture.
     /// </summary>
-    internal static class RuntimeInfo
+    public static class RuntimeInfo
     {
         /// <summary>
         /// Returns OS name (e.g. Linux, macOs, Windows)

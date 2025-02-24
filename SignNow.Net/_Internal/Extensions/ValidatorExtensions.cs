@@ -5,7 +5,7 @@ using SignNow.Net.Exceptions;
 
 namespace SignNow.Net.Internal.Extensions
 {
-    static class ValidatorExtensions
+    public static class ValidatorExtensions
     {
         /// <summary>
         /// Pattern for signNow identity (Document, invite...)

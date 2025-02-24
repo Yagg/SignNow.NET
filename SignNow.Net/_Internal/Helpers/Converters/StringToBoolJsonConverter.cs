@@ -8,7 +8,7 @@ namespace SignNow.Net.Internal.Helpers.Converters
     /// <summary>
     /// Converts <see cref="String"/> to <see cref="Boolean"/> to and from JSON.
     /// </summary>
-    internal class StringToBoolJsonConverter : JsonConverter
+    public class StringToBoolJsonConverter : JsonConverter
     {
         /// <inheritdoc cref="JsonConverter.WriteJson" />
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

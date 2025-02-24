@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using SignNow.Net.Internal.Helpers;
 using SignNow.Net.Internal.Helpers.Converters;
 using SignNow.Net.Internal.Requests;
+using SignNow.Net.Model.Requests;
 
 namespace SignNow.Net.Service
 {
@@ -34,6 +35,11 @@ namespace SignNow.Net.Service
         public string ClientSecret { get; set; }
 
         /// <summary>
+        /// Application basic authorization token.
+        /// </summary>
+        public string BasicToken { get; set; }
+
+        /// <summary>
         /// The amount of time till the token expires in seconds
         /// </summary>
         public int ExpirationTime { get; set; }
@@ -50,6 +56,19 @@ namespace SignNow.Net.Service
         {
             ClientId = clientId;
             ClientSecret = clientSecret;
+            OAuthRequestUrl = new Uri(ApiBaseUrl, "oauth2/token");
+        }
+
+        /// <summary>
+        /// Constructs an <see cref="OAuth2Service"/>
+        /// </summary>
+        /// <param name="apiBaseUrl">signNow API <see cref="WebClientBase.ApiBaseUrl"/></param>
+        /// <param name="basicToken">Application <see cref="BasicToken"/></param>
+        /// <param name="signNowClient">signNow Http client</param>
+        public OAuth2Service(Uri apiBaseUrl, string basicToken, ISignNowClient signNowClient = null)
+            : base(apiBaseUrl, null, signNowClient)
+        {
+            BasicToken = basicToken;
             OAuthRequestUrl = new Uri(ApiBaseUrl, "oauth2/token");
         }
 
@@ -72,6 +91,40 @@ namespace SignNow.Net.Service
             return new Uri(
                 new Uri($"{ApiUrl.ApiBaseUrl.Scheme}://{targetHost}"),
                 $"proxy/index.php/authorize?client_id={WebUtility.UrlEncode(ClientId)}&response_type=code&redirect_uri={WebUtility.UrlEncode(redirectUrl.ToString())}");
+        }
+
+        /// <inheritdoc cref="IOAuth2Service.GetAuthorizationUrlAsync" />
+        public async Task<Uri> GetAuthorizationUrlAsync(Uri redirectUrl, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(redirectUrl, nameof(redirectUrl));
+
+            var targetHost = ApiUrl.ApiBaseUrl.Host;
+
+            if (ApiUrl.ApiBaseUrl.Host.Equals("api-eval.signnow.com", StringComparison.CurrentCultureIgnoreCase))
+            {
+                targetHost = "eval.signnow.com";
+            }
+            else if (ApiUrl.ApiBaseUrl.Host.Equals("api.signnow.com", StringComparison.CurrentCultureIgnoreCase))
+            {
+                targetHost = "signnow.com";
+            }
+
+            var requestOptions = new GetAuthCodeOptions()
+            {
+                AccessToken = BasicToken,
+                ClientId = ClientId,
+                RedirectUri = redirectUrl.ToString(),
+            };
+
+            var query = requestOptions?.ToQueryString();
+
+            var options = new GetHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"oauth2/userauth?{query}")
+            };
+
+            var url = await SignNowClient.RequestAsync<string>(options, cancellationToken).ConfigureAwait(false);
+            return new Uri(url);
         }
 
         /// <inheritdoc cref="IOAuth2Service.GetTokenAsync(string, string, Scope, CancellationToken)" />
@@ -151,6 +204,9 @@ namespace SignNow.Net.Service
         /// <returns><see cref="Token"/> response</returns>
         private async Task<Token> ExecuteTokenRequest(GetAccessTokenRequest tokenRequest, CancellationToken cancellationToken = default)
         {
+            if (!string.IsNullOrEmpty(BasicToken))
+                return await ExecuteTokenRequestBasicToken(tokenRequest, cancellationToken);
+
             var plainTextBytes = Encoding.UTF8.GetBytes($"{ClientId}:{ClientSecret}");
             var appToken = Convert.ToBase64String(plainTextBytes);
             var options = new PostHttpRequestOptions
@@ -162,6 +218,27 @@ namespace SignNow.Net.Service
 
             var token = await SignNowClient.RequestAsync<Token>(options, cancellationToken).ConfigureAwait(false);
             token.AppToken = appToken;
+
+            return token;
+        }
+
+        /// <summary>
+        /// Processing Http request for Token issue.
+        /// </summary>
+        /// <param name="tokenRequest">Access Token request options.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns><see cref="Token"/> response</returns>
+        private async Task<Token> ExecuteTokenRequestBasicToken(GetAccessTokenRequest tokenRequest, CancellationToken cancellationToken = default)
+        {
+            var options = new PostHttpRequestOptions
+            {
+                Token = new Token { AppToken = BasicToken, TokenType = TokenType.Basic },
+                Content = tokenRequest,
+                RequestUrl = OAuthRequestUrl
+            };
+
+            var token = await SignNowClient.RequestAsync<Token>(options, cancellationToken).ConfigureAwait(false);
+            token.AppToken = BasicToken;
 
             return token;
         }

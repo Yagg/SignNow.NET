@@ -6,7 +6,7 @@ namespace SignNow.Net.Internal.Helpers.Converters
     /// <summary>
     /// Converts <see cref="System.Boolean"/> to <see cref="int"/>
     /// </summary>
-    internal class BoolToIntJsonConverter : JsonConverter
+    public class BoolToIntJsonConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

@@ -25,7 +25,7 @@ namespace UnitTests.Models
                 .RuleFor(obj => obj.Checkboxes, new CheckboxContentFaker().Generate(qty))
                 .RuleFor(obj => obj.Enumerations, new EnumerationContentFaker().Generate(qty))
                 .RuleFor(obj => obj.FieldInvites, new FieldInviteFaker().Generate(qty))
-                .RuleFor(obj => obj.fields, new FieldFaker().Generate(qty))
+                .RuleFor(obj => obj.Fields, new FieldFaker().Generate(qty))
                 .RuleFor(obj => obj.Hyperlinks, new HyperlinkContentFaker().Generate(qty))
                 .RuleFor(obj => obj.Radiobuttons, new RadiobuttonContentFaker().Generate(qty))
                 .RuleFor(obj => obj.Texts, new TextContentFaker().Generate(qty));
@@ -51,7 +51,7 @@ namespace UnitTests.Models
 
             var docWithFields = new SignNowDocumentFaker()
                 .RuleFor(obj => obj.Roles, new RoleFaker().Generate(testObjQty))
-                .RuleFor(obj => obj.fields, new FieldFaker().Rules((f1, obj1) =>
+                .RuleFor(obj => obj.Fields, new FieldFaker().Rules((f1, obj1) =>
                         {
                             obj1.Type = (FieldType)testType;
                             obj1.ElementId = f1.Random.Hash(40);
@@ -76,7 +76,7 @@ namespace UnitTests.Models
                         .Generate(testObjQty))
                 .FinishWith((f, obj) => {
                     using var role    = obj.Roles.GetEnumerator();
-                    using var field   = obj.fields.GetEnumerator();
+                    using var field   = obj.Fields.Cast<Field>().GetEnumerator();
                     using var text    = obj.Texts.GetEnumerator();
                     using var link    = obj.Hyperlinks.GetEnumerator();
                     using var sign    = obj.Signatures.GetEnumerator();

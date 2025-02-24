@@ -7,5 +7,9 @@ namespace SignNow.Net.Model.Responses
     /// Represents response from signNow API for Create Template from Document request.
     /// </summary>
     [JsonObject]
-    public class CreateTemplateFromDocumentResponse : IdResponse { }
+    public class CreateTemplateFromDocumentResponse : IdResponse
+    {
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
+    }
 }

@@ -15,6 +15,12 @@ namespace SignNow.Net.Model.Responses
     public class DocumentGroupData : IdResponse
     {
         /// <summary>
+        /// Unique identifier of history item.
+        /// </summary>
+        [JsonProperty("unique_id")]
+        public string UniqueId { get; set; }
+
+        /// <summary>
         /// Document Group name.
         /// </summary>
         [JsonProperty("name")]
@@ -90,6 +96,9 @@ namespace SignNow.Net.Model.Responses
         /// </summary>
         [JsonProperty("freeform_invite")]
         public FreeFormInviteInfo FreeFormInvite { get; set; }
+
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 
     public class GroupDocumentsInfo : IdResponse
@@ -167,11 +176,17 @@ namespace SignNow.Net.Model.Responses
         /// </summary>
         [JsonProperty("allow_to_remove", NullValueHandling = NullValueHandling.Ignore)]
         public bool IsAllowedToRemove { get; set; }
+
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 
     public class FreeFormInviteInfo : IdResponse
     {
         [JsonProperty("last_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LastId { get; set; }
+
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 }

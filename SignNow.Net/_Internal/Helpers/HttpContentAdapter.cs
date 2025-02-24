@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignNow.Net.Internal.Helpers
 {
-    internal class HttpContentToObjectAdapter<TObject> : IHttpContentAdapter<TObject>
+    public class HttpContentToObjectAdapter<TObject> : IHttpContentAdapter<TObject>
     {
         readonly IHttpContentAdapter<string> contentToStringAdapter;
 
@@ -26,7 +26,7 @@ namespace SignNow.Net.Internal.Helpers
         }
     }
 
-    internal class HttpContentToStringAdapter : IHttpContentAdapter<string>
+    public class HttpContentToStringAdapter : IHttpContentAdapter<string>
     {
         /// <inheritdoc />
         /// <returns>Content as a <see cref="string"/></returns>
@@ -36,7 +36,7 @@ namespace SignNow.Net.Internal.Helpers
         }
     }
 
-    internal class HttpContentToDownloadDocumentResponseAdapter : IHttpContentAdapter<DownloadDocumentResponse>
+    public class HttpContentToDownloadDocumentResponseAdapter : IHttpContentAdapter<DownloadDocumentResponse>
     {
         public async Task<DownloadDocumentResponse> Adapt(HttpContent content)
         {
@@ -54,7 +54,7 @@ namespace SignNow.Net.Internal.Helpers
         }
     }
 
-    internal class HttpContentToStreamAdapter : IHttpContentAdapter<Stream>
+    public class HttpContentToStreamAdapter : IHttpContentAdapter<Stream>
     {
         /// <inheritdoc />
         /// <returns>Content as a <see cref="Stream"/></returns>

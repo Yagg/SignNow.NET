@@ -7,7 +7,7 @@ using SignNow.Net.Model.Requests;
 
 namespace SignNow.Net.Internal.Requests
 {
-    internal class EditFieldRequest : JsonHttpContent
+    public class EditFieldRequest : JsonHttpContent
     {
         [JsonProperty("client_timestamp")]
         [JsonConverter(typeof(UnixTimeStampJsonConverter))]

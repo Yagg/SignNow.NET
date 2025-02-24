@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Model
@@ -7,5 +8,7 @@ namespace SignNow.Net.Model
     /// </summary>
     public class UploadDocumentResponse : IdResponse
     {
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 }

@@ -13,5 +13,8 @@ namespace SignNow.Net.Model
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
+
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 }

@@ -3,7 +3,7 @@ using System;
 
 namespace SignNow.Net.Internal.Extensions
 {
-    static class ScopeExtensions
+    public static class ScopeExtensions
     {
         public static string AsString(this Scope scope)
         {

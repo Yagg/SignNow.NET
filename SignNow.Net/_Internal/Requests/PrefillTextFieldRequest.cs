@@ -8,13 +8,13 @@ using SignNow.Net.Model.Requests;
 
 namespace SignNow.Net.Internal.Requests
 {
-    internal class PrefillTextFieldRequest : JsonHttpContent
+    public class PrefillTextFieldRequest : JsonHttpContent
     {
         /// <summary>
         /// Collections of <see cref="TextField"/> request options.
         /// </summary>
         [JsonProperty("fields")]
-        internal List<PrefillText> Fields { get; set; } = new List<PrefillText>();
+        public List<PrefillText> Fields { get; set; } = new List<PrefillText>();
 
         public PrefillTextFieldRequest(IEnumerable<TextField> fields)
         {
@@ -30,7 +30,7 @@ namespace SignNow.Net.Internal.Requests
         }
     }
 
-    internal class PrefillText
+    public class PrefillText
     {
         /// <summary>
         /// The unique field name that identifies the field.

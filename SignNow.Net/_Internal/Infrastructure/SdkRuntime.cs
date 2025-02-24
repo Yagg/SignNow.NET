@@ -6,7 +6,7 @@ namespace SignNow.Net.Internal.Infrastructure
     /// <summary>
     /// Represents signNow SDK general info (name, version...)
     /// </summary>
-    internal static class SdkRuntime
+    public static class SdkRuntime
     {
         /// <summary>
         /// Returns signNow SDK client name

@@ -7,7 +7,7 @@ namespace SignNow.Net.Internal.Helpers.Converters
     /// <summary>
     /// Converts <see cref="String"/> to <see cref="int"/> to and from JSON.
     /// </summary>
-    internal class StringToIntJsonConverter : JsonConverter
+    public class StringToIntJsonConverter : JsonConverter
     {
         /// <inheritdoc cref="JsonConverter.WriteJson" />
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

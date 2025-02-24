@@ -15,37 +15,37 @@ namespace SignNow.Net.Model
         /// All the document <see cref="TextContent"/> fields.
         /// </summary>
         [JsonProperty("texts")]
-        internal IReadOnlyCollection<TextContent> Texts { get; private set; } = new List<TextContent>();
+        public IReadOnlyCollection<TextContent> Texts { get; private set; } = new List<TextContent>();
 
         /// <summary>
         /// All the document <see cref="HyperlinkContent"/> fields.
         /// </summary>
         [JsonProperty("hyperlinks")]
-        internal IReadOnlyCollection<HyperlinkContent> Hyperlinks { get; private set; } = new List<HyperlinkContent>();
+        public IReadOnlyCollection<HyperlinkContent> Hyperlinks { get; private set; } = new List<HyperlinkContent>();
 
         /// <summary>
         /// All the documents <see cref="CheckboxContent"/> fields.
         /// </summary>
         [JsonProperty("checks")]
-        internal IReadOnlyCollection<CheckboxContent> Checkboxes { get; private set; } = new List<CheckboxContent>();
+        public IReadOnlyCollection<CheckboxContent> Checkboxes { get; private set; } = new List<CheckboxContent>();
 
         /// <summary>
         /// All the documents <see cref="AttachmentContent"/> fields.
         /// </summary>
         [JsonProperty("attachments")]
-        internal IReadOnlyCollection<AttachmentContent> Attachments { get; private set; } = new List<AttachmentContent>();
+        public IReadOnlyCollection<AttachmentContent> Attachments { get; private set; } = new List<AttachmentContent>();
 
         /// <summary>
         /// All the documents <see cref="EnumerationContent"/> fields.
         /// </summary>
         [JsonProperty("enumeration_options")]
-        internal IReadOnlyCollection<EnumerationContent> Enumerations { get; private set; } = new List<EnumerationContent>();
+        public IReadOnlyCollection<EnumerationContent> Enumerations { get; private set; } = new List<EnumerationContent>();
 
         /// <summary>
         /// All the documents <see cref="RadiobuttonContent"/> fields.
         /// </summary>
         [JsonProperty("radiobuttons")]
-        internal IReadOnlyCollection<RadiobuttonContent> Radiobuttons { get; private set; } = new List<RadiobuttonContent>();
+        public IReadOnlyCollection<RadiobuttonContent> Radiobuttons { get; private set; } = new List<RadiobuttonContent>();
 
         /// <summary>
         /// Find Field value by <see cref="Field"/> metadata.

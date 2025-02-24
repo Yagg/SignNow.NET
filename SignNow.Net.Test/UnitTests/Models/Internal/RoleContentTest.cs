@@ -21,7 +21,7 @@ namespace UnitTests.Models
             var content = new SignerOptions("test@email.com", role)
                 {
                     ExpirationDays = 14,
-                    RemindAfterDays = 7
+                    Reminder = new ReminderOptions { RemindAfter = 7 }
                 }
                 .SetAuthenticationByPassword("***secret***");
 
@@ -66,7 +66,7 @@ namespace UnitTests.Models
         {
             var content = new SignerOptions("test@email.com", role)
                 {
-                    RemindAfterDays = 1
+                    Reminder = new ReminderOptions { RemindAfter = 1 }
                 }
                 .SetAuthenticationBySms("800 831-2050");
 
@@ -89,7 +89,7 @@ namespace UnitTests.Models
             var content = new SignerOptions("test@email.com", role)
                 {
                     ExpirationDays = 5,
-                    RemindAfterDays = 1
+                    Reminder = new ReminderOptions { RemindAfter = 1 }
                 };
 
             content.SetAuthenticationBySms("800 831-2050");

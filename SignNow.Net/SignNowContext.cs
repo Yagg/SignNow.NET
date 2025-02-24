@@ -4,6 +4,7 @@ using SignNow.Net.Model;
 using SignNow.Net.Service;
 using System;
 using System.Net.Http;
+using SignNow.Net._Internal.Helpers;
 
 namespace SignNow.Net
 {
@@ -32,6 +33,9 @@ namespace SignNow.Net
 
         /// <inheritdoc cref="IDocumentGroup"/>
         public IDocumentGroup DocumentGroup { get; protected set; }
+
+        /// <inheritdoc cref="IDocumentGroupTemplatesService"/>
+        public IDocumentGroupTemplatesService DocumentGroupTemplates { get; protected set; }
 
         /// <summary>
         /// Create all the services using single instance of <see cref="ISignNowClient"/> and other dependencies.
@@ -63,6 +67,7 @@ namespace SignNow.Net
             Folders = new FolderService(ApiBaseUrl, Token, SignNowClient);
             Events = new EventSubscriptionService(ApiBaseUrl, Token, SignNowClient);
             DocumentGroup = new DocumentGroupService(ApiBaseUrl, Token, SignNowClient);
+            DocumentGroupTemplates = new DocumentGroupTemplatesService(ApiBaseUrl, Token, SignNowClient);
         }
 
         /// <summary>
@@ -76,9 +81,18 @@ namespace SignNow.Net
             OAuth.ClientSecret = clientSecret;
         }
 
+        /// <summary>
+        /// Setup application client ID/Secret for authorization.
+        /// </summary>
+        /// <param name="basicToken">Application Basic authorization token</param>
+        public void SetBasicToken(string basicToken)
+        {
+            OAuth.BasicToken = basicToken;
+        }
+
         public Token GetAccessToken(string login, string password, Scope scope)
         {
-            Token = OAuth.GetTokenAsync(login, password, scope).Result;
+            Token = ThreadUtils.RunSync(() => OAuth.GetTokenAsync(login, password, scope));
             SyncTokens();
             return Token;
         }
@@ -90,6 +104,7 @@ namespace SignNow.Net
             ((FolderService)Folders).Token = Token;
             ((EventSubscriptionService)Events).Token = Token;
             ((DocumentGroupService)DocumentGroup).Token = Token;
+            ((DocumentGroupTemplatesService)DocumentGroupTemplates).Token = Token;
         }
     }
 }

@@ -19,6 +19,14 @@ namespace SignNow.Net.Interfaces
         Uri GetAuthorizationUrl(Uri redirectUrl);
 
         /// <summary>
+        /// Returns authorization URI for OAuth2 flow
+        /// </summary>
+        /// <param name="redirectUrl"></param>
+        /// <returns><see cref="Uri" /></returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="redirectUrl" /> argument is a null.</exception>
+        Task<Uri> GetAuthorizationUrlAsync(Uri redirectUrl, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Retrieve Access token by user's login and password
         /// </summary>
         /// <param name="login">User's login</param>

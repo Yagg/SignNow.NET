@@ -35,7 +35,7 @@ namespace SignNow.Net.Examples
             var signer = new SignerOptions(email, invite.DocumentRoles().First())
                 {
                     ExpirationDays = 15,
-                    RemindAfterDays = 7,
+                    Reminder = new ReminderOptions { RemindAfter = 7 },
                 }
                 .SetAuthenticationByPassword("***PASSWORD_TO_OPEN_THE_DOCUMENT***");
 

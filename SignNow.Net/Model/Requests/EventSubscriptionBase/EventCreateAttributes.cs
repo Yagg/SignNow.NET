@@ -16,6 +16,12 @@ namespace SignNow.Net.Model.Requests.EventSubscriptionBase
         public bool DeleteAccessToken { get; set; } = true;
 
         /// <summary>
+        /// Whether to add metadata as described in document or document group endpoints. Possible values: true - add metadata, false - don't include metadata.
+        /// </summary>
+        [JsonProperty("include_metadata")]
+        public bool IncludeMetadata { get; set; } = true;
+
+        /// <summary>
         /// URL of external callback
         /// </summary>
         [JsonProperty("callback")]

@@ -4,7 +4,7 @@ using SignNow.Net.Model.Requests;
 
 namespace SignNow.Net.Internal.Requests
 {
-    internal class EmbeddedSigningLinkRequest : JsonHttpContent
+    public class EmbeddedSigningLinkRequest : JsonHttpContent
     {
         private CreateEmbedLinkOptions LinkOptions { get; set; }
 

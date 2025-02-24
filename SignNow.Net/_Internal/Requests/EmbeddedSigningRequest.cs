@@ -5,7 +5,7 @@ using SignNow.Net.Model.Requests;
 
 namespace SignNow.Net.Internal.Requests
 {
-    internal class EmbeddedSigningRequest : JsonHttpContent
+    public class EmbeddedSigningRequest : JsonHttpContent
     {
         /// <summary>
         /// Collections of <see cref="EmbeddedInvite"/> request options.

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using SignNow.Net.Model;
 using SignNow.Net.Model.Requests.DocumentGroup;
 using SignNow.Net.Model.Responses;
+using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Interfaces
 {
@@ -85,5 +86,15 @@ namespace SignNow.Net.Interfaces
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns></returns>
         Task<DownloadDocumentResponse> DownloadDocumentGroupAsync(string documentGroupId, DownloadOptions options, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Allows users to add metadata to the selected document. All added metadata will be linked to the document during the invite to sign.
+        /// Also, if you'd like to use this metadata in any event subscription, you can add upon creating a webhook.
+        /// </summary>
+        /// <param name="documentId">Identity of the document to edit values for.</param>
+        /// <param name="data">Metadata values</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns></returns>
+        public Task<AddMetadataResponse> AddMetadataAsync(string documentGroupId, DocumentGroupMetadata data, CancellationToken cancellationToken = default);
     }
 }

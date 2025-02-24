@@ -21,6 +21,15 @@ namespace SignNow.Net.Interfaces
         Task<InviteResponse> CreateInviteAsync(string documentId, SignInvite invite, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Create an invite to sign a document group.
+        /// </summary>
+        /// <param name="documentGroupId">Identity of the document group to create signing invite for.</param>
+        /// <param name="invite">A simple free form invite or a role-based invite.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns></returns>
+        Task<GroupInviteResponse> CreateInviteAsync(string documentGroupId, GroupInvite invite, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Creates embedded signing invites for a document without sending emails.
         /// </summary>
         /// <param name="documentId">Identity of the document to create signing invite for.</param>

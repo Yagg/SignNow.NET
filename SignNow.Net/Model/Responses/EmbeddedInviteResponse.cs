@@ -34,6 +34,9 @@ namespace SignNow.Net.Model
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
         public InviteStatus Status { get; set; }
+
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 
     public class EmbeddedInviteResponse

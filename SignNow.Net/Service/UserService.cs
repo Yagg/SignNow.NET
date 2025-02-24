@@ -112,7 +112,7 @@ namespace SignNow.Net.Service
         {
             Guard.ArgumentNotNull(invite, nameof(invite));
 
-            var sender = GetCurrentUserAsync(cancellationToken).Result;
+            var sender = await GetCurrentUserAsync(cancellationToken);
             invite.From = sender.Email;
 
             Token.TokenType = TokenType.Bearer;
@@ -124,6 +124,24 @@ namespace SignNow.Net.Service
             };
 
             return await SignNowClient.RequestAsync<InviteResponse>(requestOptions, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc cref="ISignInvite.CreateInviteAsync(string, GroupInvite, CancellationToken)" />
+        /// <exception cref="ArgumentNullException"><paramref name="invite"/> cannot be null.</exception>
+        /// <exception cref="ArgumentException">Invalid format of <paramref name="documentGroupId"/></exception>
+        public async Task<GroupInviteResponse> CreateInviteAsync(string documentGroupId, GroupInvite invite, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(invite, nameof(invite));
+
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new PostHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"/documentgroup/{documentGroupId.ValidateId()}/groupinvite"),
+                Content = invite,
+                Token = Token
+            };
+
+            return await SignNowClient.RequestAsync<GroupInviteResponse>(requestOptions, cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc cref="ISignInvite.CreateInviteAsync(string, EmbeddedSigningInvite, CancellationToken)" />

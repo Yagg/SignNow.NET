@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SignNow.Net.Internal.Model
 {
-    internal class ErrorResponseContext
+    public class ErrorResponseContext
     {
         /// <summary>
         /// Error Message
@@ -19,7 +19,7 @@ namespace SignNow.Net.Internal.Model
         public string Code { get; set; }
     }
 
-    internal class ErrorResponse
+    public class ErrorResponse
     {
         /// <summary>
         /// Error Message in some response cases

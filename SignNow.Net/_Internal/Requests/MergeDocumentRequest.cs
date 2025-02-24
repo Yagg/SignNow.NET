@@ -9,7 +9,7 @@ using SignNow.Net.Model.Requests;
 
 namespace SignNow.Net.Internal.Requests
 {
-    internal class MergeDocumentRequest : JsonHttpContent
+    public class MergeDocumentRequest : JsonHttpContent
     {
         /// <summary>
         /// The name of the document that will be created and written to.

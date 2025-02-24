@@ -93,7 +93,7 @@ namespace FeatureTests
             // create document with one role and one role invite and check the document status
             var documentWithOneInvite = baseDocument
                 .RuleFor(d => d.FieldInvites, f => new FieldInviteFaker().Generate(1))
-                .RuleFor(d => d.fields, f => new FieldFaker().Generate(1))
+                .RuleFor(d => d.Fields, f => new FieldFaker().Generate(1))
                 .FinishWith((f, obj) => {
                     using var role = obj.Roles.GetEnumerator();
                     using var invite = obj.FieldInvites.GetEnumerator();

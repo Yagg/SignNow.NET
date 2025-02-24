@@ -43,7 +43,7 @@ namespace SignNow.Net.Model.FieldContents
         /// List of Radio elements.
         /// </summary>
         [JsonProperty("radio")]
-        public List<RadioContent> Radio { get; internal set; } = new List<RadioContent>();
+        public List<RadioContent> Radio { get; set; } = new List<RadioContent>();
 
         /// <summary>
         /// Returns Radiobutton content (actual state) as string.

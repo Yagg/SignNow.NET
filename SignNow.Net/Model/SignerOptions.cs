@@ -112,7 +112,7 @@ namespace SignNow.Net.Model
         /// In how many days will another email be sent to remind of a signature invite.
         /// </summary>
         [JsonProperty("reminder", NullValueHandling = NullValueHandling.Ignore)]
-        public int? RemindAfterDays { get; set; }
+        public ReminderOptions Reminder { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SignerOptions"/> class.

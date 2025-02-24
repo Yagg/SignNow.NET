@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Model.Responses
@@ -7,5 +8,7 @@ namespace SignNow.Net.Model.Responses
     /// </summary>
     public class CreateDocumentFromTemplateResponse :IdResponse
     {
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
     }
 }

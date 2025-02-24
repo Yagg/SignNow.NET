@@ -15,7 +15,7 @@ namespace SignNow.Net.Model
         /// </summary>
         [JsonProperty("small")]
         [JsonConverter(typeof(StringToUriJsonConverter))]
-        public Uri Small { get; internal set; }
+        public Uri Small { get; set; }
 
         /// <summary>
         /// Uri for medium document preview image size
@@ -23,7 +23,7 @@ namespace SignNow.Net.Model
         /// </summary>
         [JsonProperty("medium")]
         [JsonConverter(typeof(StringToUriJsonConverter))]
-        public Uri Medium { get; internal set; }
+        public Uri Medium { get; set; }
 
         /// <summary>
         /// Uri for large document preview image size.
@@ -31,6 +31,6 @@ namespace SignNow.Net.Model
         /// </summary>
         [JsonProperty("large")]
         [JsonConverter(typeof(StringToUriJsonConverter))]
-        public Uri Large { get; internal set; }
+        public Uri Large { get; set; }
     }
 }

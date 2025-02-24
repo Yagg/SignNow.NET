@@ -16,7 +16,7 @@ namespace SignNow.Net.Model
         /// Unique identifier of field.
         /// </summary>
         [JsonProperty("id")]
-        internal string Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Field type.
@@ -30,13 +30,13 @@ namespace SignNow.Net.Model
         /// </summary>
         /// TODO: Use Role model instead of RoleId + RoleName
         [JsonProperty("role_id")]
-        internal string RoleId { get; set; }
+        public string RoleId { get; set; }
 
         /// <summary>
         /// Signer role name.
         /// </summary>
         [JsonProperty("role")]
-        internal string RoleName { get; set; }
+        public string RoleName { get; set; }
 
         /// <summary>
         /// Field attributes: name, label, x/y coordinates, width, height...
@@ -48,19 +48,19 @@ namespace SignNow.Net.Model
         /// Document owner email.
         /// </summary>
         [JsonProperty("originator")]
-        internal string Owner { get; set; }
+        public string Owner { get; set; }
 
         /// <summary>
         /// Signer email.
         /// </summary>
         [JsonProperty("fulfiller")]
-        internal string Signer { get; set; }
+        public string Signer { get; set; }
 
         /// <summary>
         /// Field request ID
         /// </summary>
         [JsonProperty("field_request_id")]
-        public string FieldRequestId { get; internal set; }
+        public string FieldRequestId { get; set; }
 
         /// <summary>
         /// Identity of specific element for corresponding field type.
@@ -72,7 +72,7 @@ namespace SignNow.Net.Model
         /// Radio group elements initial state for Radiobuttons field type.
         /// </summary>
         [JsonProperty("radio", NullValueHandling = NullValueHandling.Ignore)]
-        internal IReadOnlyCollection<RadioContent> RadioGroup { get; set; }
+        public IReadOnlyCollection<RadioContent> RadioGroup { get; set; }
     }
 
     /// <summary>

@@ -7,7 +7,7 @@ using SignNow.Net.Model;
 
 namespace SignNow.Net.Internal.Requests
 {
-    internal class GetAccessTokenRequest : IContent
+    public class GetAccessTokenRequest : IContent
     {
         /// <summary>
         /// User's email.

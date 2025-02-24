@@ -12,18 +12,18 @@ namespace SignNow.Net.Model
     public abstract class SignNowInvite : ISignNowInviteStatus
     {
         /// <inheritdoc cref="ISignNowInviteStatus"/>
-        public virtual string Id { get; internal set; }
+        public virtual string Id { get; set; }
 
         /// <inheritdoc cref="ISignNowInviteStatus"/>
-        public virtual string SignerEmail { get; internal set; }
+        public virtual string SignerEmail { get; set; }
 
         /// <inheritdoc cref="ISignNowInviteStatus"/>
-        public virtual InviteStatus Status { get; internal set; }
+        public virtual InviteStatus Status { get; set; }
 
         /// <inheritdoc />
         [JsonProperty("created")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public DateTime Created { get; internal set; }
+        public DateTime Created { get; set; }
 
         internal SignNowInvite() { }
     }
@@ -37,50 +37,50 @@ namespace SignNow.Net.Model
         /// Unique identifier of field invite.
         /// </summary>
         [JsonProperty("id")]
-        public override string Id { get; internal set; }
+        public override string Id { get; set; }
 
         /// <inheritdoc cref="SignNowInvite"/>
         [JsonProperty("email")]
-        public override string SignerEmail { get; internal set; }
+        public override string SignerEmail { get; set; }
 
         /// <summary>
         /// Status of the field invite sign request.
         /// </summary>
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public override InviteStatus Status { get; internal set; }
+        public override InviteStatus Status { get; set; }
 
         /// <summary>
         /// Signer role name.
         /// </summary>
         [JsonProperty("role")]
-        public string RoleName { get; internal set; }
+        public string RoleName { get; set; }
 
         /// <summary>
         /// Signer role identity.
         /// </summary>
         [JsonProperty("role_id")]
-        public string RoleId { get; internal set; }
+        public string RoleId { get; set; }
 
         /// <summary>
         /// Timestamp document was updated.
         /// </summary>
         [JsonProperty("updated")]
         [JsonConverter(typeof(UnixTimeStampJsonConverter))]
-        public DateTime Updated { get; internal set; }
+        public DateTime Updated { get; set; }
 
         /// <summary>
         /// Date and time of invite expiration.
         /// </summary>
         [JsonProperty("expiration_time")]
         [JsonConverter(typeof(UnixTimeStampJsonConverter))]
-        public DateTime ExpiredOn { get; internal set; }
+        public DateTime ExpiredOn { get; set; }
 
         /// <summary>
         /// Is embedded signing invite or not.
         /// </summary>
         [JsonProperty("is_embedded")]
-        public bool IsEmbedded { get; internal set; }
+        public bool IsEmbedded { get; set; }
     }
 
     /// <summary>
@@ -92,13 +92,13 @@ namespace SignNow.Net.Model
         /// Sign invite unique id.
         /// </summary>
         [JsonProperty("unique_id")]
-        public override string Id { get; internal set; }
+        public override string Id { get; set; }
 
         /// <summary>
         /// Email of user who invited to sign the document.
         /// </summary>
         [JsonProperty("signer_email")]
-        public override string SignerEmail { get; internal set; }
+        public override string SignerEmail { get; set; }
 
         /// <summary>
         /// <see cref="FreeformInvite"/> sign status of current signer.
@@ -110,25 +110,25 @@ namespace SignNow.Net.Model
         /// Identity of user who invited to sign the document.
         /// </summary>
         [JsonProperty("user_id")]
-        public string UserId { get; internal set; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// Identity of the signers' signature
         /// </summary>
         [JsonProperty("signature_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string SignatureId { get; internal set; }
+        public string SignatureId { get; set; }
 
         /// <summary>
         /// Email of document owner.
         /// </summary>
         [JsonProperty("originator_email")]
-        public string Owner { get; internal set; }
+        public string Owner { get; set; }
 
         /// <summary>
         /// Is freeform sign invite canceled or not.
         /// </summary>
         [JsonProperty("canceled", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringToBoolJsonConverter))]
-        internal bool? IsCanceled { get; set; }
+        public bool? IsCanceled { get; set; }
     }
 }

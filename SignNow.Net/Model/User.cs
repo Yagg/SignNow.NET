@@ -64,7 +64,7 @@ namespace SignNow.Net.Model
         /// User billing period data
         /// </summary>
         [JsonProperty("billing_period")]
-        public UserBilling BillingPeriod { get; internal set; }
+        public UserBilling BillingPeriod { get; set; }
 
         /// <summary>
         /// Companies which user belongs to.
@@ -76,12 +76,12 @@ namespace SignNow.Net.Model
         /// Documents used by User per month.
         /// </summary>
         [JsonProperty("monthly_document_count")]
-        public int MonthlyDocumentCount { get; internal set; }
+        public int MonthlyDocumentCount { get; set; }
 
         /// <summary>
         /// The number of documents used by User for the entire time.
         /// </summary>
         [JsonProperty("lifetime_document_count")]
-        public int LifetimeDocumentCount { get; internal set; }
+        public int LifetimeDocumentCount { get; set; }
     }
 }

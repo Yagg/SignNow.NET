@@ -12,6 +12,7 @@ using System.Net.Http;
 using SignNow.Net.Model.EditFields;
 using SignNow.Net.Model.Requests;
 using SignNow.Net.Model.Responses;
+using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Service
 {
@@ -296,6 +297,25 @@ namespace SignNow.Net.Service
 
             return await SignNowClient
                 .RequestAsync<EditDocumentResponse>(requestOptions, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public async Task<AddMetadataResponse> AddMetadataAsync(string documentId, DocumentMetadata data, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(data, nameof(data));
+
+            data.Source = "webhook"; // only this allowed for document
+
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new PutHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"/document/{documentId.ValidateId()}/metadata"),
+                Content = data,
+                Token = Token
+            };
+
+            return await SignNowClient
+                .RequestAsync<AddMetadataResponse>(requestOptions, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Model.Responses
@@ -5,5 +6,9 @@ namespace SignNow.Net.Model.Responses
     /// <summary>
     /// Represents response from signNow API for Create Document Group request.
     /// </summary>
-    public class DocumentGroupCreateResponse : IdResponse { }
+    public class DocumentGroupCreateResponse : IdResponse
+    {
+        [JsonProperty("success")]
+        public override bool Success { get; set; } = true;
+    }
 }

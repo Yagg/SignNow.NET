@@ -9,7 +9,7 @@ namespace SignNow.Net.Internal.Helpers.Converters
     /// <summary>
     /// Converts Unix timestamps to <see cref="DateTime"/> from JSON.
     /// </summary>
-    internal class UnixTimeStampJsonConverter : UnixDateTimeConverter
+    public class UnixTimeStampJsonConverter : UnixDateTimeConverter
     {
         /// <inheritdoc cref="JsonConverter.WriteJson" />
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -50,7 +50,7 @@ namespace SignNow.Net.Internal.Helpers.Converters
     /// <summary>
     /// Converts <see cref="DateTime"/> to and from Unix timestamp.
     /// </summary>
-    internal static class UnixTimeStampConverter
+    public static class UnixTimeStampConverter
     {
         public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 

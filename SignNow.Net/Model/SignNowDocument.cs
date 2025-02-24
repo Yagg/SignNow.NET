@@ -101,19 +101,19 @@ namespace SignNow.Net.Model
         /// Thumbnails with different document preview image sizes.
         /// </summary>
         [JsonProperty("thumbnail")]
-        public Thumbnail Thumbnail { get; internal set; }
+        public Thumbnail Thumbnail { get; set; }
 
         /// <summary>
         /// The document signer roles.
         /// </summary>
         [JsonProperty("roles")]
-        public List<Role> Roles { get; internal set; } = new List<Role>();
+        public List<Role> Roles { get; set; } = new List<Role>();
 
         /// <summary>
         /// The document <see cref="SignatureContent"/>
         /// </summary>
         [JsonProperty("signatures")]
-        internal List<SignatureContent> Signatures { get; set; } = new List<SignatureContent>();
+        public List<SignatureContent> Signatures { get; set; } = new List<SignatureContent>();
 
         /// <summary>
         /// The document <see cref="Field"/>
@@ -131,7 +131,7 @@ namespace SignNow.Net.Model
         /// The document freeform invite requests.
         /// </summary>
         [JsonProperty("requests")]
-        internal List<FreeformInvite> InviteRequests { get; private set; } = new List<FreeformInvite>();
+        public List<FreeformInvite> InviteRequests { get; private set; } = new List<FreeformInvite>();
 
         /// <summary>
         /// The document field invite requests.
