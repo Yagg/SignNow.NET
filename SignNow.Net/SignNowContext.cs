@@ -31,8 +31,8 @@ namespace SignNow.Net
         /// <inheritdoc cref="IEventSubscriptionService"/>
         public IEventSubscriptionService Events { get; protected set; }
 
-        /// <inheritdoc cref="IDocumentGroup"/>
-        public IDocumentGroup DocumentGroup { get; protected set; }
+        /// <inheritdoc cref="IDocumentGroupService"/>
+        public IDocumentGroupService DocumentGroups { get; protected set; }
 
         /// <inheritdoc cref="IDocumentGroupTemplatesService"/>
         public IDocumentGroupTemplatesService DocumentGroupTemplates { get; protected set; }
@@ -66,7 +66,7 @@ namespace SignNow.Net
             Documents = new DocumentService(ApiBaseUrl, Token, SignNowClient);
             Folders = new FolderService(ApiBaseUrl, Token, SignNowClient);
             Events = new EventSubscriptionService(ApiBaseUrl, Token, SignNowClient);
-            DocumentGroup = new DocumentGroupService(ApiBaseUrl, Token, SignNowClient);
+            DocumentGroups = new DocumentGroupService(ApiBaseUrl, Token, SignNowClient);
             DocumentGroupTemplates = new DocumentGroupTemplatesService(ApiBaseUrl, Token, SignNowClient);
         }
 

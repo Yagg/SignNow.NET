@@ -12,7 +12,7 @@ namespace SignNow.Net.Interfaces
     /// Interface for any operations with a Document Groups in signNow
     /// can be used to create, rename, delete, move a document group etc.
     /// </summary>
-    public interface IDocumentGroup
+    public interface IDocumentGroupService
     {
         /// <summary>
         /// Creates a document group from a list of document ids

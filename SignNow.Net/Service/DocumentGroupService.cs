@@ -11,11 +11,10 @@ using SignNow.Net.Model;
 using SignNow.Net.Model.Requests;
 using SignNow.Net.Model.Requests.DocumentGroup;
 using SignNow.Net.Model.Responses;
-using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Service
 {
-    public class DocumentGroupService : WebClientBase, IDocumentGroup
+    public class DocumentGroupService : WebClientBase, IDocumentGroupService
     {
         /// <summary>
         /// Creates new instance of <see cref="DocumentService"/>

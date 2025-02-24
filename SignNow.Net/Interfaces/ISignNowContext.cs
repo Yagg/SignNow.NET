@@ -35,5 +35,8 @@ namespace SignNow.Net.Interfaces
 
         /// <inheritdoc cref="IFolderService"/>
         IFolderService Folders { get; }
+
+        /// <inheritdoc cref="IDocumentGroupService"/>
+        IDocumentGroupService DocumentGroups { get; }
     }
 }
