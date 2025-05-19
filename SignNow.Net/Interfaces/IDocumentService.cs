@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using SignNow.Net.Model.EditFields;
 using SignNow.Net.Model.Responses;
-using SignNow.Net.Model.Responses.GenericResponses;
 
 namespace SignNow.Net.Interfaces
 {
@@ -149,5 +148,14 @@ namespace SignNow.Net.Interfaces
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns></returns>
         Task<AddMetadataResponse> AddMetadataAsync(string documentId, DocumentMetadata data, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve contents from the fields completed by the signer.
+        /// </summary>
+        /// <param name="documentId">Identity of the document to retrieve fileds list</param>
+        /// <param name="page">Page for pagination</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled</param>
+        /// <returns>List of completed fields</returns>
+        Task<CompletedFieldResponse> GetCompletedFieldsAsync(string documentId, int page=1, CancellationToken cancellationToken = default);
     }
 }

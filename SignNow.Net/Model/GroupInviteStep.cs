@@ -200,7 +200,7 @@ namespace SignNow.Net.Model
 
         public List<GroupInviteAction> GroupInviteAction { get; internal set; } = new List<GroupInviteAction>();
 
-        public void AddInviteStep(GroupInviteAction action)
+        public void AddInviteAction(GroupInviteAction action)
         {
             Guard.ArgumentNotNull(action, nameof(action));
             Guard.PropertyNotNull(action.RoleName, nameof(action.RoleName));

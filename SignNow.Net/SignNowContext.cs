@@ -103,7 +103,7 @@ namespace SignNow.Net
             ((DocumentService)Documents).Token = Token;
             ((FolderService)Folders).Token = Token;
             ((EventSubscriptionService)Events).Token = Token;
-            ((DocumentGroupService)DocumentGroup).Token = Token;
+            ((DocumentGroupService)DocumentGroups).Token = Token;
             ((DocumentGroupTemplatesService)DocumentGroupTemplates).Token = Token;
         }
     }

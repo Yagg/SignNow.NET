@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SignNow.Net.Model
 {
@@ -43,7 +44,7 @@ namespace SignNow.Net.Model
         public string InitiatorId { get; set; }
 
         [JsonProperty("metadata")]
-        public DocumentMetadata Metadata { get; set; }
+        public dynamic Metadata { get; set; }
     }
 
     public class WebhookPayload
@@ -59,14 +60,19 @@ namespace SignNow.Net.Model
             using (var tr = new StreamReader(stream))
             {
                 var strResp = tr.ReadToEnd();
-                if (string.IsNullOrEmpty(strResp))
-                {
-                    return null;
-                }
-                else
-                {
-                    return JsonConvert.DeserializeObject<WebhookPayload>(strResp);
-                }
+                return FromString(strResp);
+            }
+        }
+
+        public static WebhookPayload FromString(string payload)
+        {
+            if (string.IsNullOrEmpty(payload))
+            {
+                return null;
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<WebhookPayload>(payload);
             }
         }
     }

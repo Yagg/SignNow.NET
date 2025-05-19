@@ -213,6 +213,12 @@ namespace SignNow.Net.Model
         UserDocumentGroupCreate,
 
         /// <summary>
+        /// All the required fields on this user's document group were filled in
+        /// </summary>
+        [EnumMember(Value = "user.document_group.complete")]
+        UserDocumentGroupComplete,
+
+        /// <summary>
         /// The document group has been deleted
         /// </summary>
         [EnumMember(Value = "document_group.delete")]

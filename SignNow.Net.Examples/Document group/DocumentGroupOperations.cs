@@ -30,12 +30,12 @@ namespace SignNow.Net.Examples
             }
 
             // Create document group from uploaded documents
-            var documentGroup = await testContext.DocumentGroup
+            var documentGroup = await testContext.DocumentGroups
                 .CreateDocumentGroupAsync("CreateDocumentGroupTest", documents)
                 .ConfigureAwait(false);
 
             // Get document group by id
-            var createdDocumentGroup = await testContext.DocumentGroup.GetDocumentGroupInfoAsync(documentGroup.Id).ConfigureAwait(false);
+            var createdDocumentGroup = await testContext.DocumentGroups.GetDocumentGroupInfoAsync(documentGroup.Id).ConfigureAwait(false);
 
             // Check if document group was created
             Assert.IsTrue(documentGroup.Id.Length == 40);
@@ -44,20 +44,20 @@ namespace SignNow.Net.Examples
             Console.WriteLine("Created document group: {0} with name {1}", documentGroup.Id, createdDocumentGroup.Data.Name);
 
             // rename document group
-            await testContext.DocumentGroup.RenameDocumentGroupAsync("renamedDocumentGroup", documentGroup.Id).ConfigureAwait(false);
+            await testContext.DocumentGroups.RenameDocumentGroupAsync("renamedDocumentGroup", documentGroup.Id).ConfigureAwait(false);
 
             // Get document group by id
-            var renamedDocumentGroup = await testContext.DocumentGroup.GetDocumentGroupInfoAsync(documentGroup.Id).ConfigureAwait(false);
+            var renamedDocumentGroup = await testContext.DocumentGroups.GetDocumentGroupInfoAsync(documentGroup.Id).ConfigureAwait(false);
 
             // check if document group was renamed
             Assert.AreEqual("renamedDocumentGroup", renamedDocumentGroup.Data.Name);
             Console.WriteLine("Document group was renamed: {0} => {1}", createdDocumentGroup.Data.Name, renamedDocumentGroup.Data.Name);
 
             // Download document group files
-            var pdfFiles = await testContext.DocumentGroup
+            var pdfFiles = await testContext.DocumentGroups
                 .DownloadDocumentGroupAsync(documentGroup.Id, new DownloadOptions {DownloadType = DownloadType.MergedPdf})
                 .ConfigureAwait(false);
-            var zipFile = await testContext.DocumentGroup
+            var zipFile = await testContext.DocumentGroups
                 .DownloadDocumentGroupAsync(documentGroup.Id, new DownloadOptions {DownloadType = DownloadType.Zip})
                 .ConfigureAwait(false);
 
@@ -72,7 +72,7 @@ namespace SignNow.Net.Examples
             Console.WriteLine("Document group downloades as: {0} with name {1} and size {2} bytes", zipFile.MediaType, zipFile.Filename, zipFile.Length);
 
             // Clean up
-            await testContext.DocumentGroup.DeleteDocumentGroupAsync(documentGroup.Id).ConfigureAwait(false);
+            await testContext.DocumentGroups.DeleteDocumentGroupAsync(documentGroup.Id).ConfigureAwait(false);
             foreach (var document in documents)
             {
                 DeleteTestDocument(document.Id);

@@ -300,6 +300,8 @@ namespace SignNow.Net.Service
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        /// <exception cref="System.ArgumentException">If <see paramref="documentId"/> is not valid.</exception>
         public async Task<AddMetadataResponse> AddMetadataAsync(string documentId, DocumentMetadata data, CancellationToken cancellationToken = default)
         {
             Guard.ArgumentNotNull(data, nameof(data));
@@ -316,6 +318,22 @@ namespace SignNow.Net.Service
 
             return await SignNowClient
                 .RequestAsync<AddMetadataResponse>(requestOptions, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        /// <exception cref="System.ArgumentException">If <see paramref="documentId"/> is not valid.</exception>
+        public async Task<CompletedFieldResponse> GetCompletedFieldsAsync(string documentId, int page = 1, CancellationToken cancellationToken = default)
+        {
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new GetHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"/v2/documents/{documentId.ValidateId()}/fields?page={page}"),
+                Token = Token
+            };
+
+            return await SignNowClient
+                .RequestAsync<CompletedFieldResponse>(requestOptions, cancellationToken)
                 .ConfigureAwait(false);
         }
     }
