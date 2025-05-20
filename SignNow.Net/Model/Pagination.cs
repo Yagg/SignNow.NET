@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using SignNow.Net.Internal.Helpers.Converters;
 
@@ -22,7 +23,7 @@ namespace SignNow.Net.Model
         public int TotalPages { get; set; }
 
         [JsonProperty("links", NullValueHandling = NullValueHandling.Ignore)]
-        public PageLinks Links { get; set; }
+        public dynamic Links { get; set; }
     }
 
     public class PageLinks
