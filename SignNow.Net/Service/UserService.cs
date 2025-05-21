@@ -163,6 +163,25 @@ namespace SignNow.Net.Service
                 .ConfigureAwait(false);
         }
 
+        /// <inheritdoc cref="ISignInvite.CreateInviteAsync(string, EmbeddedSigningGroupInvite, CancellationToken)" />
+        /// <exception cref="ArgumentNullException"><paramref name="invite"/> cannot be null.</exception>
+        public async Task<EmbeddedGroupInviteResponse> CreateInviteAsync(string documentId, EmbeddedSigningGroupInvite invite, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(invite, nameof(invite));
+
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new PostHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"/v2/document-groups/{documentId.ValidateId()}/embedded-invites"),
+                Content = new EmbeddedSigningGroupRequest(invite),
+                Token = Token
+            };
+
+            return await SignNowClient
+                .RequestAsync<EmbeddedGroupInviteResponse>(requestOptions, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
         /// <inheritdoc cref="ISignInvite.GenerateEmbeddedInviteLinkAsync" />
         /// <exception cref="ArgumentNullException"><paramref name="options"/> cannot be null.</exception>
         public async Task<EmbeddedInviteLinkResponse> GenerateEmbeddedInviteLinkAsync(string documentId, CreateEmbedLinkOptions options, CancellationToken cancellationToken = default)
@@ -176,6 +195,27 @@ namespace SignNow.Net.Service
             {
                 RequestUrl = requestUrl,
                 Content = new EmbeddedSigningLinkRequest(options),
+                Token = Token
+            };
+
+            return await SignNowClient
+                .RequestAsync<EmbeddedInviteLinkResponse>(requestOptions, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc cref="ISignInvite.GenerateEmbeddedInviteLinkAsync" />
+        /// <exception cref="ArgumentNullException"><paramref name="options"/> cannot be null.</exception>
+        public async Task<EmbeddedInviteLinkResponse> GenerateEmbeddedGroupInviteLinkAsync(string documentGroupId, CreateEmbedLinkOptions options, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(options, nameof(options));
+
+            var requestUrl = new Uri(ApiBaseUrl, $"/v2/document-groups/{documentGroupId.ValidateId()}/embedded-invites/{options.FieldInvite.Id}/link");
+
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new PostHttpRequestOptions
+            {
+                RequestUrl = requestUrl,
+                Content = new EmbeddedGroupSigningLinkRequest(options),
                 Token = Token
             };
 

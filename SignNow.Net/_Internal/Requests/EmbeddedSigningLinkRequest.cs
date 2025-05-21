@@ -26,4 +26,31 @@ namespace SignNow.Net.Internal.Requests
             LinkOptions = options;
         }
     }
+
+    public class EmbeddedGroupSigningLinkRequest : JsonHttpContent
+    {
+        private CreateEmbedLinkOptions LinkOptions { get; set; }
+
+        /// <inheritdoc cref="CreateEmbedLinkOptions.AuthMethod" />
+        [JsonProperty("auth_method")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EmbeddedAuthType AuthMethod => LinkOptions.AuthMethod;
+
+        /// <inheritdoc cref="CreateEmbedLinkOptions.LinkExpiration" />
+        [JsonProperty("link_expiration")]
+        public uint? LinkExpiration => LinkOptions.LinkExpiration;
+
+        [JsonProperty("email")]
+        public string Email => LinkOptions.FieldInvite.SignerEmail;
+
+
+        /// <summary>
+        /// Embedded Signing Link Request ctor.
+        /// </summary>
+        /// <param name="options">options to create link for embedded signing.</param>
+        public EmbeddedGroupSigningLinkRequest(CreateEmbedLinkOptions options)
+        {
+            LinkOptions = options;
+        }
+    }
 }

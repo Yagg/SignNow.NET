@@ -47,4 +47,13 @@ namespace SignNow.Net.Model
         [JsonProperty("data")]
         public IReadOnlyList<EmbeddedInviteData> InviteData { get; internal set; }
     }
+
+    public class EmbeddedGroupInviteResponse
+    {
+        /// <summary>
+        /// Returns the invite data for newly created embedded invite.
+        /// </summary>
+        [JsonProperty("data")]
+        public EmbeddedInviteData InviteData { get; internal set; }
+    }
 }

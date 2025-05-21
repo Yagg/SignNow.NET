@@ -20,4 +20,20 @@ namespace SignNow.Net.Internal.Requests
             Invites = invite.EmbeddedSignInvites;
         }
     }
+
+    public class EmbeddedSigningGroupRequest : JsonHttpContent
+    {
+        /// <summary>
+        /// Collections of <see cref="EmbeddedInvite"/> request options.
+        /// </summary>
+        [JsonProperty("invites")]
+        public List<EmbeddedSigningGroupInviteStep> Invites { get; set; } = new List<EmbeddedSigningGroupInviteStep>();
+
+        public EmbeddedSigningGroupRequest() { }
+
+        public EmbeddedSigningGroupRequest(EmbeddedSigningGroupInvite invite)
+        {
+            Invites = invite.InviteSteps;
+        }
+    }
 }

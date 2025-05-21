@@ -39,6 +39,15 @@ namespace SignNow.Net.Interfaces
         Task<EmbeddedInviteResponse> CreateInviteAsync(string documentId, EmbeddedSigningInvite invite, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Creates embedded signing invites for a document group without sending emails.
+        /// </summary>
+        /// <param name="documentGroupId">Identity of the document to create signing invite for.</param>
+        /// <param name="invite">An embedded signing invites options for each document role.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns></returns>
+        Task<EmbeddedGroupInviteResponse> CreateInviteAsync(string documentGroupId, EmbeddedSigningGroupInvite invite, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Creates a link for the embedded invite.
         /// </summary>
         /// <param name="documentId">Identity of the document to create signing link invite for.</param>
@@ -46,6 +55,15 @@ namespace SignNow.Net.Interfaces
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns></returns>
         Task<EmbeddedInviteLinkResponse> GenerateEmbeddedInviteLinkAsync(string documentId, CreateEmbedLinkOptions options, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a link for the embedded group invite.
+        /// </summary>
+        /// <param name="documentGroupId">Identity of the document group to create signing link invite for.</param>
+        /// <param name="options">Embedded invite link create options.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns></returns>
+        Task<EmbeddedInviteLinkResponse> GenerateEmbeddedGroupInviteLinkAsync(string documentGroupId, CreateEmbedLinkOptions options, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancels a freeform invite sign request.

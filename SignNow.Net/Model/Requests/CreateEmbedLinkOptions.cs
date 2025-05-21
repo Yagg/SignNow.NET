@@ -6,8 +6,6 @@ namespace SignNow.Net.Model.Requests
 {
     public class CreateEmbedLinkOptions
     {
-        private uint? linkExpiration { get; set; }
-
         /// <summary>
         /// Signer authentication method.
         /// </summary>
