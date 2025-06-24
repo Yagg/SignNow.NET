@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SignNow.Net.Model;
 using SignNow.Net.Model.Requests;
+using SignNow.Net.Model.Responses;
 
 namespace SignNow.Net.Interfaces
 {
@@ -67,5 +68,13 @@ namespace SignNow.Net.Interfaces
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns></returns>
         Task<IEnumerable<SignNowDocument>> GetUserDocumentsAsync(int perPage = 15, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns list of user teams
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>List of user teams</returns>
+        Task<TeamsResponse> GetUserTeamsAsync(IQueryToString options, CancellationToken cancellationToken = default);
     }
 }

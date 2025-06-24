@@ -27,5 +27,14 @@ namespace SignNow.Net.Interfaces
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns></returns>
         Task<DocumentGroupTemplatesResponse> GetDocumentGroupTemplatesAsync(IQueryToString options, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns all document group templates shared with the team.
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Document group templates</returns>
+        Task<DocumentGroupTemplatesResponse> GetDocumentGroupTemplatesAsync(string teamId, IQueryToString options, CancellationToken cancellationToken = default);
     }
 }
