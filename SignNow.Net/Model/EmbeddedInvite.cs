@@ -186,5 +186,19 @@ namespace SignNow.Net.Model
         [JsonProperty("redirect_target", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public RedirectTarget? RedirectTarget { get; set; }
+
+        /// <summary>
+        /// Defines how the invite is sent.
+        /// </summary>
+        [JsonProperty("delivery_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EmbeddedLinkDeliveryType? DeliveryType { get; set; }
+
+        /// <summary>
+        /// In how many minutes the email invite expires. Can be used only if delivery_type=email.
+        /// </summary>
+        [JsonProperty("link_expiration", NullValueHandling = NullValueHandling.Ignore)]
+        public int? LinkExpiration { get; set; }
+
     }
 }

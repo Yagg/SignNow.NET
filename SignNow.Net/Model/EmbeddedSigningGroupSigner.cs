@@ -110,6 +110,19 @@ namespace SignNow.Net.Model
         public string CloseRedirectUri { get; set; }
 
         /// <summary>
+        /// Defines how the invite is sent.
+        /// </summary>
+        [JsonProperty("delivery_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EmbeddedLinkDeliveryType? DeliveryType { get; set; }
+
+        /// <summary>
+        /// In how many minutes the email invite expires. Can be used only if delivery_type=email.
+        /// </summary>
+        [JsonProperty("link_expiration", NullValueHandling = NullValueHandling.Ignore)]
+        public int? LinkExpiration { get; set; }
+
+        /// <summary>
         /// This object is used to request QES signatures from signers. To use it, a user must be a member of an organization
         /// with QES settings enabled. If QES is used, it must be used for all signers in the invite.
         /// For more information, see QES user guide.
