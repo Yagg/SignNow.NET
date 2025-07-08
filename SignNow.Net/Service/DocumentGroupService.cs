@@ -33,7 +33,7 @@ namespace SignNow.Net.Service
             var requestOptions = new PostHttpRequestOptions
             {
                 RequestUrl = new Uri(ApiBaseUrl, "/documentgroup"),
-                Content = new CreateDocumentGroupRequest(documents) {GroupName = groupName},
+                Content = new CreateDocumentGroupRequest(documents) { GroupName = groupName },
                 Token = Token
             };
 
@@ -105,7 +105,7 @@ namespace SignNow.Net.Service
             var requestOptions = new PutHttpRequestOptions
             {
                 RequestUrl = new Uri(ApiBaseUrl, $"/v2/document-groups/{documentGroupId.ValidateId()}"),
-                Content = new RenameDocumentGroupRequest { GroupName = newName},
+                Content = new RenameDocumentGroupRequest { GroupName = newName },
                 Token = Token
             };
 
@@ -204,5 +204,20 @@ namespace SignNow.Net.Service
                 .ConfigureAwait(false);
         }
 
+        public async Task<EditDocGroupRecepientsResponse> EditDocGroupRecepientsAsync(string documentGroupId, EditDocGroupRecepientsRequest request, CancellationToken cancellationToken = default)
+        {
+            Guard.ArgumentNotNull(request, nameof(request));
+            Token.TokenType = TokenType.Bearer;
+            var requestOptions = new PutHttpRequestOptions
+            {
+                RequestUrl = new Uri(ApiBaseUrl, $"/v2/document-groups/{documentGroupId.ValidateId()}/recipients"),
+                Content = request,
+                Token = Token
+            };
+            return await SignNowClient
+                .RequestAsync<EditDocGroupRecepientsResponse>(requestOptions, cancellationToken)
+                .ConfigureAwait(false);
+
+        }
     }
 }

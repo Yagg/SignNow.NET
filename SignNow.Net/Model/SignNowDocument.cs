@@ -140,6 +140,13 @@ namespace SignNow.Net.Model
         public IReadOnlyCollection<FieldInvite> FieldInvites { get; private set; } = new List<FieldInvite>();
 
         /// <summary>
+        /// Routing details
+        /// </summary>
+        [JsonProperty("routing_details")]
+        public List<RoutingDetails> RoutingDetails { get; set; }
+
+
+        /// <summary>
         /// Provides common details of any kind of invites (freeform or role-based)
         /// </summary>
         [JsonIgnore]

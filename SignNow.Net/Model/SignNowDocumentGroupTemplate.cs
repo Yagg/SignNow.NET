@@ -51,7 +51,7 @@ namespace SignNow.Net.Model
         /// Routing details
         /// </summary>
         [JsonProperty("routing_details")]
-        public RoutingDetails RoutingDetails { get; set; }
+        public GroupTemplateRoutingDetails RoutingDetails { get; set; }
 
         [JsonProperty("templates")]
         public IReadOnlyList<TemplateInfo> Templates { get; set; }
@@ -85,7 +85,7 @@ namespace SignNow.Net.Model
 
     }
 
-    public class RoutingDetails
+    public class GroupTemplateRoutingDetails
     {
         [JsonProperty("sign_as_merged")]
         public bool SignAsMerged {  get; set; }
@@ -93,4 +93,5 @@ namespace SignNow.Net.Model
         [JsonProperty("include_email_attachments")]
         public string IncludeEmailAttachments { get; set; }
     }
+
 }
