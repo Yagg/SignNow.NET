@@ -14,7 +14,7 @@ namespace SignNow.Net.Model.Requests
         public HttpContent GetHttpContent()
         {
             return new StringContent(
-                JsonConvert.SerializeObject(this),
+                JsonConvert.SerializeObject(this, new JsonSerializerSettings() { DefaultValueHandling = DefaultValueHandling.Ignore }),
                 Encoding.UTF8, "application/json");
         }
     }
