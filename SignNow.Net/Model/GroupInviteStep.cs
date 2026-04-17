@@ -154,17 +154,24 @@ namespace SignNow.Net.Model
         public SignatureOption Signature { get; set; }
     }
 
-    public class GroupInviteAction : IGroupInviteAction, IGroupInviteOption
+
+    public class GroupInviteEmail: IGroupInviteOption
     {
         // IGroupInviteBase
         public string Email { get; set; }
         public EmailGroup EmailGroup { get; set; }
-
         // IGroupInviteOption
         public string Subject { get; set; }
         public string Message { get; set; }
         public int ExpirationDays { get; set; }
         public ReminderOptions Reminder { get; set; }
+    }
+
+    public class GroupInviteAction : IGroupInviteAction
+    {
+        // IGroupInviteBase
+        public string Email { get; set; }
+        public EmailGroup EmailGroup { get; set; }
 
         // IGroupInviteAction
         public string RoleName { get; set; }
@@ -193,14 +200,18 @@ namespace SignNow.Net.Model
         public int Order { get; set; } = 1;
 
         [JsonProperty("invite_emails")]
-        public IEnumerable<IGroupInviteOption> InviteEmails => GroupInviteAction;
+        public IEnumerable<IGroupInviteOption> InviteEmails => GroupInviteEmails;
 
         [JsonProperty("invite_actions")]
         public IEnumerable<IGroupInviteAction> InviteActions => GroupInviteAction;
 
+        [JsonIgnore]
         public List<GroupInviteAction> GroupInviteAction { get; internal set; } = new List<GroupInviteAction>();
 
-        public void AddInviteAction(GroupInviteAction action)
+        [JsonIgnore]
+        public List<GroupInviteEmail> GroupInviteEmails { get; internal set; } = new List<GroupInviteEmail>();
+
+        public void AddInviteAction(GroupInviteEmail email, GroupInviteAction action)
         {
             Guard.ArgumentNotNull(action, nameof(action));
             Guard.PropertyNotNull(action.RoleName, nameof(action.RoleName));
@@ -208,6 +219,7 @@ namespace SignNow.Net.Model
             Guard.PropertyNotNull(action.DocumentId, nameof(action.DocumentId));
 
             GroupInviteAction.Add(action);
+            GroupInviteEmails.Add(email);
         }
     }
 }
