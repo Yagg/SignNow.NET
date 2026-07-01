@@ -21,14 +21,15 @@ namespace SignNow.Net.Model
         [JsonProperty("invite_link_instructions")]
         public object InviteLinkInstructions { get; set; }
 
-        [JsonProperty("viewers")]
-        public List<object> Viewers { get; set; }
+        // not in the documentation, but in the response
+        //[JsonProperty("viewers")]
+        //public List<object> Viewers { get; set; }
 
-        [JsonProperty("approvers")]
-        public List<object> Approvers { get; set; }
+        //[JsonProperty("approvers")]
+        //public List<object> Approvers { get; set; }
 
-        [JsonProperty("attributes")]
-        public List<object> Attributes { get; set; }
+        //[JsonProperty("attributes")]
+        //public object Attributes { get; set; }
     }
 
     public class RoutingDetail
@@ -43,8 +44,10 @@ namespace SignNow.Net.Model
         public string RoleId { get; set; }
         [JsonProperty("signing_order")]
         public int SigningOrder { get; set; }
-        [JsonProperty("decline_by_signature")]
-        public bool DeclineBySignature { get; set; }
+
+        // not in the documentation, but in the response
+        //[JsonProperty("decline_by_signature")]
+        //public bool DeclineBySignature { get; set; }
     }
     /*
    "routing_details": [
