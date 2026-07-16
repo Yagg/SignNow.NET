@@ -150,6 +150,14 @@ namespace SignNow.Net.Interfaces
         Task<AddMetadataResponse> AddMetadataAsync(string documentId, DocumentMetadata data, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// This endpoint allows users to retrieve metadata for a selected document.
+        /// </summary>
+        /// <param name="documentId">Identity of the document to edit values for.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns></returns>
+        Task<GetMetadataResponse> GetMetadataAsync(string documentId, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Retrieve contents from the fields completed by the signer.
         /// </summary>
         /// <param name="documentId">Identity of the document to retrieve fileds list</param>
